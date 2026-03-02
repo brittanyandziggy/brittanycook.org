@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brittany Cook</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cream: #F8F5F0;
+      --paper: #FFFDF9;
+      --ink: #1C1C1E;
+      --mid: #6B6860;
+      --light: #C8C4BC;
+      --rule: #E8E4DC;
+      --accent: #2C4A6E;
+      --accent-light: #EBF0F7;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      min-height: 100vh;
+    }
+
+    /* ── Layout ── */
+    .site-wrapper {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      min-height: 100vh;
+    }
+
+    /* ── Sidebar ── */
+    .sidebar {
+      background: var(--paper);
+      border-right: 1px solid var(--rule);
+      padding: 56px 40px;
+      display: flex;
+      flex-direction: column;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .sidebar-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 26px;
+      font-weight: 500;
+      line-height: 1.2;
+      color: var(--ink);
+      margin-bottom: 6px;
+      letter-spacing: -0.02em;
+    }
+
+    .sidebar-role {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 48px;
+    }
+
+    .sidebar-divider {
+      width: 32px;
+      height: 1px;
+      background: var(--accent);
+      margin-bottom: 40px;
+    }
+
+    nav { flex: 1; }
+
+    nav a {
+      display: block;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--mid);
+      text-decoration: none;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--rule);
+      transition: color 0.2s;
+      cursor: pointer;
+    }
+
+    nav a:first-child { border-top: 1px solid var(--rule); }
+
+    nav a:hover, nav a.active {
+      color: var(--accent);
+    }
+
+    nav a.active {
+      font-weight: 500;
+    }
+
+    .sidebar-footer {
+      font-size: 11px;
+      color: var(--light);
+      line-height: 1.6;
+      margin-top: auto;
+      padding-top: 40px;
+    }
+
+    /* ── Main content ── */
+    .main {
+      padding: 72px 80px;
+      max-width: 860px;
+    }
+
+    /* ── Pages ── */
+    .page { display: none; animation: fadeIn 0.35s ease; }
+    .page.active { display: block; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Page header ── */
+    .page-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    .page-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 52px;
+      font-weight: 300;
+      line-height: 1.1;
+      color: var(--ink);
+      margin-bottom: 40px;
+      letter-spacing: -0.02em;
+    }
+
+    .page-rule {
+      width: 100%;
+      height: 1px;
+      background: var(--rule);
+      margin-bottom: 48px;
+    }
+
+    /* ── Bio section ── */
+    .bio-lead {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1.65;
+      color: var(--ink);
+      margin-bottom: 32px;
+      max-width: 620px;
+    }
+
+    .bio-body {
+      font-size: 15px;
+      line-height: 1.85;
+      color: #3C3A36;
+      max-width: 580px;
+      margin-bottom: 48px;
+    }
+
+    .bio-body p + p { margin-top: 20px; }
+
+    /* ── Info cards ── */
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--rule);
+      border: 1px solid var(--rule);
+      border-radius: 2px;
+      overflow: hidden;
+      margin-top: 48px;
+    }
+
+    .info-card {
+      background: var(--paper);
+      padding: 24px 28px;
+    }
+
+    .info-label {
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--light);
+      margin-bottom: 8px;
+    }
+
+    .info-value {
+      font-size: 14px;
+      color: var(--ink);
+      line-height: 1.5;
+    }
+
+    /* ── Publications ── */
+    .pub-empty {
+      text-align: center;
+      padding: 80px 40px;
+      border: 1px dashed var(--rule);
+      border-radius: 2px;
+    }
+
+    .pub-empty-symbol {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 48px;
+      color: var(--rule);
+      margin-bottom: 20px;
+      line-height: 1;
+    }
+
+    .pub-empty-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--mid);
+      margin-bottom: 10px;
+    }
+
+    .pub-empty-sub {
+      font-size: 13px;
+      color: var(--light);
+      line-height: 1.7;
+      max-width: 340px;
+      margin: 0 auto;
+    }
+
+    /* ── Contact ── */
+    .contact-intro {
+      font-size: 15px;
+      color: #3C3A36;
+      line-height: 1.85;
+      max-width: 500px;
+      margin-bottom: 56px;
+    }
+
+    .contact-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border-top: 1px solid var(--rule);
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: baseline;
+      gap: 24px;
+      padding: 22px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .contact-type {
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--light);
+      width: 80px;
+      flex-shrink: 0;
+    }
+
+    .contact-value {
+      font-size: 15px;
+      color: var(--ink);
+    }
+
+    .contact-value a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s;
+    }
+
+    .contact-value a:hover {
+      border-bottom-color: var(--accent);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .site-wrapper { grid-template-columns: 1fr; }
+      .sidebar {
+        position: static;
+        height: auto;
+        padding: 40px 28px 32px;
+        border-right: none;
+        border-bottom: 1px solid var(--rule);
+      }
+      .sidebar-name { font-size: 22px; }
+      nav { display: flex; gap: 0; margin-bottom: 0; }
+      nav a { border: none; border-right: 1px solid var(--rule); padding: 8px 16px; flex-shrink: 0; }
+      nav a:first-child { border-top: none; }
+      .main { padding: 40px 28px; }
+      .page-title { font-size: 38px; }
+      .info-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="site-wrapper">
+
+  <!-- ── Sidebar ── -->
+  <aside class="sidebar">
+    <div class="sidebar-name">Brittany Cook</div>
+    <div class="sidebar-role">Research Assistant</div>
+    <div class="sidebar-divider"></div>
+    <nav>
+      <a class="active" onclick="showPage('home', this)">Home</a>
+      <a onclick="showPage('publications', this)">Publications</a>
+      <a onclick="showPage('contact', this)">Contact</a>
+    </nav>
+      <div class="sidebar-footer">Orygen Youth Mental Health<br>Melbourne, Australia</div>
+  </aside>
+
+  <!-- ── Main ── -->
+  <main class="main">
+
+    <!-- HOME -->
+    <section class="page active" id="page-home">
+      <div class="page-eyebrow">About</div>
+      <h1 class="page-title">Hello, I'm Brittany.</h1>
+      <div class="page-rule"></div>
+
+      <p class="bio-lead">I'm a research assistant based in Melbourne at Orygen Youth Mental Health, passionate about early psychosis, cognition, novel interventions and neuroimaging.</p>
+
+      <div class="bio-body">
+        <p>I'm currently lucky enough to work across the CogScreen study under Kelly Allott, Shayden Bryce and Alexandra Stainton. I also work to support Alexandra Stainton's pilot study  investigating the relationship between coupled sleep oscillations and overnight memory consolidation in youth depression.</p>
+        <p>Prior to my current role, I completed my studies at The University of Auckland in New Zealand, graduating with a Bachelor of Advanced Science with first class honours, majoring in Psychology and Neuroscience.    </p>
+      </div>
+
+      <div class="info-grid">
+        <!-- ✏️ EDIT: Update each card with your real details -->
+        <div class="info-card">
+          <div class="info-label">Based in</div>
+          <div class="info-value">Melbourne, Australia</div>
+        </div>
+        <div class="info-card">
+          <div class="info-label">Institution</div>
+          <!-- ✏️ Replace with your institution -->
+          <div class="info-value">The University of Melbourne</div>
+        </div>
+        <div class="info-card">
+          <div class="info-label">Research area</div>
+          <!-- ✏️ Replace with your focus area -->
+          <div class="info-value">Early Psychosis, Cognition, Neuroimaging and Sleep Science</div>
+        </div>
+        <div class="info-card">
+          <div class="info-label">Status</div>
+          <div class="info-value">Research Assistant · Available from July 2026</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PUBLICATIONS -->
+    <section class="page" id="page-publications">
+      <div class="page-eyebrow">Research</div>
+      <h1 class="page-title">Publications</h1>
+      <div class="page-rule"></div>
+
+      <div class="pub-empty">
+        <div class="pub-empty-symbol">§</div>
+        <div class="pub-empty-title">Coming soon</div>
+        <div class="pub-empty-sub">Publications and research outputs will appear here. Check back soon.</div>
+      </div>
+
+      <!-- ✏️ When you have publications, delete the block above and
+           add them here using this format:
+
+      <div class="pub-item">
+        <div class="pub-year">2025</div>
+        <div class="pub-details">
+          <div class="pub-title">Title of your paper</div>
+          <div class="pub-journal">Journal Name · Vol. X, No. Y</div>
+          <div class="pub-authors">Cook, B. et al.</div>
+        </div>
+      </div>
+      -->
+    </section>
+
+    <!-- CONTACT -->
+    <section class="page" id="page-contact">
+      <div class="page-eyebrow">Get in touch</div>
+      <h1 class="page-title">Contact</h1>
+      <div class="page-rule"></div>
+
+      <!-- ✏️ EDIT: Replace this intro paragraph -->
+      <p class="contact-intro">I'm always happy to connect with fellow researchers and clinicians. Feel free to reach out with questions, collaboration ideas, or just to say hello.</p>
+
+      <div class="contact-list">
+
+        <!-- ✏️ EDIT: Replace with your real email -->
+        <div class="contact-item">
+          <span class="contact-type">Email</span>
+          <span class="contact-value">
+            <a href="/cdn-cgi/l/email-protection#97f5e5fee3e3f6f9eef4f8f8fce0f8e5fcd7f0faf6fefbb9f4f8fa"><span class="__cf_email__" data-cfemail="e88a9a819c9c8986918b8787839f879a83a88f85898184c68b8785">[email&#160;protected]</span></a>
+          </span>
+        </div>
+
+        <!-- ✏️ EDIT: Replace with your LinkedIn URL, or delete this block -->
+        <div class="contact-item">
+          <span class="contact-type">LinkedIn</span>
+          <span class="contact-value">
+            <a href="https://linkedin.com/in/brittanycookresearch" target="_blank">linkedin.com/in/brittanycookresearch</a>
+          </span>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  function showPage(id, link) {
+    document.querySelectorAll('.page').f
